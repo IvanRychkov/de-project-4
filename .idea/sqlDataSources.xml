@@ -25,11 +25,11 @@
           <option name="dbmsName" value="POSTGRES" />
           <option name="urls">
             <array>
-              <option value="file://$PROJECT_DIR$/ddl" />
+              <option value="file://$PROJECT_DIR$/src/ddl" />
             </array>
           </option>
-          <option name="outPath" value="$PROJECT_DIR$/ddl" />
-          <option name="outLayout" value="File per object by schema.groovy" />
+          <option name="outPath" value="$PROJECT_DIR$/src/ddl" />
+          <option name="outLayout" value="File per object by schema and database.groovy" />
           <option name="scriptOptions">
             <map>
               <entry key="CreateIfNotExists" value="1" />
