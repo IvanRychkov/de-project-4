@@ -87,8 +87,10 @@ with dag:
         python_callable=pg_load_events,
     )
 
+
     def get_mdb_loader(collection_name: str, filter_by: str, target_table_name: str) -> Callable[[], None]:
         """Создаёт функцию для перекачки данных из MongoDB в Postgres"""
+
         def loader_func():
             mongo = get_mongo_connection()
             pg = get_postgres_dwh_connection()
@@ -123,6 +125,7 @@ with dag:
                     (workflow_key, j,)
                 )
             print(obj_count, 'objects loaded')
+
         return loader_func
 
 
@@ -130,7 +133,7 @@ with dag:
         task_id='mdb_load_users',
         python_callable=get_mdb_loader('users', 'update_ts', 'stg.ordersystem_users'),
     )
-    
+
     mdb_load_orders_task = PythonOperator(
         task_id='mdb_load_orders',
         python_callable=get_mdb_loader('orders', 'update_ts', 'stg.ordersystem_orders'),
