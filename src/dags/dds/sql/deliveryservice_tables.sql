@@ -5,6 +5,7 @@ select object_id, object_value ->> 'name'
 from stg.deliverysystem_couriers;
 
 truncate table dds.fct_delivery;
+alter sequence dds.fct_delivery_id_seq restart with 1;
 insert into dds.fct_delivery (delivery_id, courier_id, order_id, rating, tip_amt)
 select object_id                                    as delivery_id,
        c.id                                         as courier_id,
