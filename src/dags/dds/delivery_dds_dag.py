@@ -22,5 +22,5 @@ dag = DAG(
 with dag:
     PostgresOperator(
         task_id='fill_dds_tables',
-        sql='./deliveryservice_tables',
+        sql='./deliveryservice_tables.sql',
     )
