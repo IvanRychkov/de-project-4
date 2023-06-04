@@ -1,0 +1,26 @@
+### deliveries
+GET {{ host }}/deliveries?restaurant_id={{ restaurant_id }}&from={{ from }}&
+    to={{ to }}&sort_field={{ sort_field }}&sort_direction={{ sort_direction }}&limit={{ limit }}&
+    offset={{ limit }}
+X-Nickname: {{ your_nickname }}
+X-Cohort: {{ your_cohort_number }}
+X-API-KEY: {{ api_key }}
+Location
+
+
+
+### restaurants
+GET {{ host }}/restaurants?sort_field=id&sort_direction=&limit=1&offset=0
+X-Nickname: {{ your_nickname }}
+X-Cohort: {{ your_cohort_number }}
+X-API-KEY: {{ api_key }}
+
+
+### couriers
+GET {{ host }}/couriers?sort_field={{ sort_field }}&
+    sort_direction={{ sort_direction }}&limit={{ limit }}&offset={{ offset }}
+X-Nickname: {{ your_nickname }}
+X-Cohort: {{ your_cohort_number }}
+X-API-KEY: {{ api_key }}
+
+
