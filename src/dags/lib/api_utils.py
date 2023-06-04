@@ -4,10 +4,6 @@ from requests import Response
 from airflow.providers.http.hooks.http import HttpHook
 
 
-def get_api_hook(method='GET') -> HttpHook:
-    return HttpHook(method=method, http_conn_id='DELIVERY_API_CONNECTION')
-
-
 def request(api_hook: HttpHook, endpoint, **kwargs) -> Response:
     """Делает простой запрос в api."""
     r = api_hook.run(endpoint, **kwargs)

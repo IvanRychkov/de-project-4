@@ -3,7 +3,7 @@ import logging
 from pendulum import datetime, parse
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from lib.api_utils import get_api_hook, request_paginated
+from lib.api_utils import HttpHook, request_paginated
 from lib.pg_connect import ConnectionBuilder
 from psycopg.sql import SQL, Identifier
 from lib.dict_util import json2str
@@ -32,7 +32,7 @@ dag = DAG(
 def load_data_from_api(resource_name: str, id_field='_id', **kwargs):
     """Загружает данные из API-эндпоинта в staging-таблицу в Postgres."""
     # Получаем подключение к API из Airflow
-    api = get_api_hook()
+    api = HttpHook(method='GET', http_conn_id='DELIVERY_API_CONNECTION')
     logging.info(kwargs.get('data'))
     n_loaded = 0
     # Создаём подключение к базе
