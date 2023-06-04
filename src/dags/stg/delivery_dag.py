@@ -1,6 +1,6 @@
 import logging
 
-from pendulum import datetime, parse
+from pendulum import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from lib.api_utils import HttpHook, request_paginated
