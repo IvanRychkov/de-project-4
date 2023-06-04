@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="1fa89f7e-27b5-40fb-82ca-d1e91bb692e8" name="de@localhost (DDL) Mapping">
+      <data-sources db="ac3c3a6d-7c2a-4a9e-af77-1bdf5b6d0698" ddl="579280b6-3ce2-404d-9278-a06f9e4f06fa" />
+      <scope>
+        <node kind="database" qname="de">
+          <node kind="schema">
+            <name qname="cdm" />
+            <name qname="dds" />
+            <name qname="public" />
+            <name qname="public_test" />
+            <name qname="stg" />
+          </node>
+        </node>
+      </scope>
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="579280b6-3ce2-404d-9278-a06f9e4f06fa" />
+          <option name="name" value="de@localhost (DDL)" />
+          <option name="dbmsName" value="POSTGRES" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/src/ddl" />
+            </array>
+          </option>
+          <option name="outPath" value="$PROJECT_DIR$/src/ddl" />
+          <option name="outLayout" value="File per object by schema and database.groovy" />
+          <option name="scriptOptions">
+            <map>
+              <entry key="CreateIfNotExists" value="1" />
+              <entry key="CreateOrReplace" value="1" />
+              <entry key="Grants" value="1" />
+            </map>
+          </option>
+        </State>
+      </list>
+    </option>
+  </component>
+</project>
