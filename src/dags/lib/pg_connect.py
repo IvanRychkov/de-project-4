@@ -65,7 +65,3 @@ class ConnectionBuilder:
                        sslmode)
 
         return pg
-
-
-def get_dwh_connection():
-    return ConnectionBuilder.pg_conn('PG_WAREHOUSE_CONNECTION').connection()

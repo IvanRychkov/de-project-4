@@ -4,7 +4,7 @@ from pendulum import datetime, parse
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from lib.api_utils import get_api_hook, request_paginated
-from lib.pg_connect import get_dwh_connection
+from lib.pg_connect import ConnectionBuilder
 from psycopg.sql import SQL, Identifier
 from lib.dict_util import json2str
 
@@ -31,19 +31,23 @@ dag = DAG(
 
 def load_data_from_api(resource_name: str, id_field='_id', **kwargs):
     """Загружает данные из API-эндпоинта в staging-таблицу в Postgres."""
+    # Получаем подключение к API из Airflow
     api = get_api_hook()
     logging.info(kwargs.get('data'))
     n_loaded = 0
-    with get_dwh_connection() as conn:
-        for n_loaded, obj in enumerate(request_paginated(api, resource_name, limit=50, data=kwargs.get('data')),
+    # Создаём подключение к базе
+    with ConnectionBuilder.pg_conn('PG_WAREHOUSE_CONNECTION').connection() as conn:
+        # Запрашиваем объекты из API постранично
+        for n_loaded, obj in enumerate(request_paginated(api, resource_name, data=kwargs.get('data')),
                                        start=1):
             logging.debug(obj)
+            # Выполняем вставку с обновлением
             conn.execute(
                 SQL('''
                     insert into stg.{} (object_id, object_value)
                     values (%s, %s)
                     on conflict (object_id) do update set object_value = excluded.object_value;
-                    ''').format(Identifier('deliverysystem_' + resource_name)),  # Динамическое имя таблицы
+                    ''').format(Identifier('deliverysystem_' + resource_name)),
                 (obj[id_field], json2str(obj))
             )
     logging.info(f'objects loaded: {n_loaded}')
