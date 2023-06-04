@@ -23,6 +23,7 @@ dag = DAG(
         op_kwargs=dict(
             data={
                 'sort_field': '_id',
+                'sort_direction': 'asc',
             }
         )
     ),
