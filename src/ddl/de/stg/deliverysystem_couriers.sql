@@ -1,10 +1,10 @@
 create table if not exists stg.deliverysystem_couriers
 (
-    id        serial
+    id           serial
         primary key,
-    object_id varchar not null
+    object_id    varchar not null
         unique,
-    name      varchar not null
+    object_value json    not null
 );
 
 alter table stg.deliverysystem_couriers
