@@ -23,5 +23,4 @@ with dag:
     PostgresOperator(
         task_id='fill_dds_tables',
         sql='./deliveryservice_tables',
-        split_statements=False,
     )
