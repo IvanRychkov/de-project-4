@@ -5,6 +5,7 @@ import logging
 from pendulum import datetime
 from airflow import DAG
 from airflow.providers.postgres.operators.postgres import PostgresOperator
+from airflow.sensors.external_task import ExternalTaskSensor
 
 logging.basicConfig()
 
@@ -20,7 +21,14 @@ dag = DAG(
 )
 
 with dag:
-    PostgresOperator(
+    wait_for_core_dds = ExternalTaskSensor(
+        task_id='wait_for_core_dds',
+        external_dag_id='load_dds',
+    )
+
+    fill_tables = PostgresOperator(
         task_id='fill_dds_tables',
         sql='./sql/delivery_dds_tables.sql',
     )
+
+    wait_for_core_dds >> fill_tables
