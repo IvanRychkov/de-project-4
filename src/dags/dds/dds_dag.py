@@ -4,7 +4,7 @@ from pendulum import datetime
 
 dag = DAG(
     dag_id='load_dds',
-    schedule_interval='*/15 * * * *',
+    schedule_interval='0 * * * *',
     start_date=datetime(2023, 5, 9),
     catchup=False,
     default_args={
