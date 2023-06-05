@@ -10,7 +10,7 @@ logging.basicConfig()
 
 dag = DAG(
     dag_id='delivery_dds_dag',
-    schedule_interval='*/15 * * * *',
+    schedule_interval='0 * * * *',
     start_date=datetime(2023, 5, 1),
     catchup=False,
     max_active_runs=1,
