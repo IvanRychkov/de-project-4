@@ -71,7 +71,8 @@ with dag:
         op_kwargs={
             'data': {
                 'from': '{{ data_interval_start.strftime("%Y-%m-%d %H:%M:%S") }}',
-                'to': '{{ data_interval_end.strftime("%Y-%m-%d %H:%M:%S") }}'
+                'to': '{{ data_interval_end.strftime("%Y-%m-%d %H:%M:%S") }}',
+                **dag.default_args['op_kwargs']['data'],
             }
         }
     )
