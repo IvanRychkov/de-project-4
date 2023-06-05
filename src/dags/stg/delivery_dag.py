@@ -12,7 +12,7 @@ logging.basicConfig()
 
 dag = DAG(
     dag_id='delivery_staging_dag',
-    schedule_interval='*/15 * * * *',
+    schedule_interval='0 * * * *',
     start_date=datetime(2023, 5, 1),
     catchup=False,
     max_active_tasks=3,
@@ -70,7 +70,7 @@ with dag:
         op_args=('deliveries', 'order_id'),
         op_kwargs={
             'data': {
-                'from': '{{ data_interval_end.subtract(days=6).strftime("%Y-%m-%d %H:%M:%S") }}',
+                'from': '{{ data_interval_start.strftime("%Y-%m-%d %H:%M:%S") }}',
                 'to': '{{ data_interval_end.strftime("%Y-%m-%d %H:%M:%S") }}'
             }
         }
